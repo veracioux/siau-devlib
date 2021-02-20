@@ -1,49 +1,46 @@
+/** @file function.h */
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
 #include "devlib_global.h"
+#include "data.h"
 
 #include <QString>
 #include <QMap>
 
 class DEVLIB_EXPORT Condition
 {
-    QMap<QString, QString> attr = {
-        {"valueName", ""},
-        {"value", ""},
-    };
+    QString valueName;
+    QString value;
 public:
-    QString &operator[](const QString &key);
 };
 
 /**
- * @brief Abstract class that represents a function that a
- * device can perform.
+ * A function that a device can perform.
  */
 class DEVLIB_EXPORT Function
 {
 };
 
 /**
- * @brief An atomic function that is not made up of any subfunctions.
+ * An atomic function that is not made up of any subfunctions.
  */
-class DEVLIB_EXPORT PrimitiveFunction : public Function
+class DEVLIB_EXPORT SingleFunction : public Function
 {
+    /** List of string attributes */
     QMap<QString, QString> attr = {
         {"name", ""},
         {"friendly", ""},
-        {"valueType", "float"}
     };
+    ValueSpec valueSpec;
+    /** Condition that makes this function available for use. */
     Condition condition;
-
-public:
-    QString &operator[](const QString &key);
 };
 
 /**
- * @brief A function that is wholly made up of other subfunctions.
+ * A function that is wholly made up of other subfunctions.
  */
-class DEVLIB_EXPORT CompositeFunction : public Function
+class DEVLIB_EXPORT MultiFunction : public Function
 {
     QList<Function> subfunctions;
 };

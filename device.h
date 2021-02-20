@@ -1,15 +1,16 @@
+/** @file device.h */
 #ifndef DEVICE_H
 #define DEVICE_H
 
 #include "devlib_global.h"
-#include "value.h"
+#include "data.h"
 #include "function.h"
 
 #include <QString>
 #include <QMap>
 #include <QList>
 
-struct DEVLIB_EXPORT Device
+class DEVLIB_EXPORT Device
 {
     QString name, vendorId, deviceId;
     QMap<QString, QString> attr = {
@@ -17,7 +18,7 @@ struct DEVLIB_EXPORT Device
         {"vendorId", ""},
         {"deviceId", ""},
     };
-    QList<Value> values;
+    QList<Data> values;
     QList<Function> functions;
 };
 

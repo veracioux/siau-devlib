@@ -1,3 +1,4 @@
+/** @file devlib_global.h */
 #ifndef DEVLIB_GLOBAL_H
 #define DEVLIB_GLOBAL_H
 

@@ -12,14 +12,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # The library target
 add_library(devlib SHARED
-    value.cpp
+    data.cpp
     function.cpp
     json.cpp
     ############
-    value.h
+    data.h
     function.h
-    value.h
     device.h
+    json.h
+    devlib_global.h
 )
 target_compile_definitions(devlib PRIVATE DEVLIB_LIBRARY)
 

@@ -8,7 +8,7 @@ Device jsonParseDevice(const QString &factoryFile, const QString &userFile)
     return {}; // TODO
 }
 
-Value jsonParseValue(const QJsonObject &val)
+Data jsonParseValue(const QJsonObject &val)
 {
     return {}; // TODO
 }
