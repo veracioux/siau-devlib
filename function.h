@@ -8,9 +8,12 @@
 #include <QString>
 #include <QMap>
 
+/**
+ * A condition to enable a device function.
+ */
 class DEVLIB_EXPORT Condition
 {
-    QString valueName;
+    QString dataName;
     QString value;
 public:
 };
@@ -20,6 +23,8 @@ public:
  */
 class DEVLIB_EXPORT Function
 {
+protected:
+    Function() = default;
 };
 
 /**
@@ -27,11 +32,7 @@ class DEVLIB_EXPORT Function
  */
 class DEVLIB_EXPORT SingleFunction : public Function
 {
-    /** List of string attributes */
-    QMap<QString, QString> attr = {
-        {"name", ""},
-        {"friendly", ""},
-    };
+    QString name, friendlyName;
     ValueSpec valueSpec;
     /** Condition that makes this function available for use. */
     Condition condition;

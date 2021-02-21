@@ -13,11 +13,6 @@
 class DEVLIB_EXPORT Device
 {
     QString name, vendorId, deviceId;
-    QMap<QString, QString> attr = {
-        {"name", ""},
-        {"vendorId", ""},
-        {"deviceId", ""},
-    };
     QList<Data> values;
     QList<Function> functions;
 };
