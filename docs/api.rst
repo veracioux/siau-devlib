@@ -10,8 +10,6 @@ koji koriste ovu biblioteku.
 Globalni simboli
 ================
 
-.. rubric:: Datoteka `devlib_global.h`
-
 .. doxygenfile:: devlib_global.h
    :project: devlib
 
@@ -23,15 +21,32 @@ Globalni simboli
 Klasa ``ValueSpec``
 ===================
 
-.. rubric:: ``#include "data.h"``
+.. rubric:: ``#include "devlib/value.h"``
 
-.. doxygenclass:: ValueSpec
-   :project: devlib
+|startovw|
+
+.. image:: _build/doxygen/html/classValueSpec__coll__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: ValueSpec
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: ValueSpec
+         :project: devlib
 
 Klasa ``Data``
 ==============
 
-.. rubric:: ``#include "data.h"``
+.. rubric:: ``#include "devlib/data.h"``
 
 |startovw|
 
@@ -40,13 +55,24 @@ Klasa ``Data``
 
 |endcollapse|
 
-.. doxygenclass:: Data
-   :project: devlib
+.. tabs::
 
-Klasa ``Condition``
-===================
+   .. tab:: Sažetak
 
-.. rubric:: ``#include "function.h"``
+      .. doxygenclass:: Data
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: Data
+         :project: devlib
+
+
+Struktura ``Condition``
+=======================
+
+.. rubric:: ``#include "devlib/function.h"``
 
 |startovw|
 
@@ -56,13 +82,23 @@ Klasa ``Condition``
 
 |endcollapse|
 
-.. doxygenclass:: Condition
-   :project: devlib
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenstruct:: Condition
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenstruct:: Condition
+         :project: devlib
 
 Klasa ``Function`` i podklase
 =============================
 
-.. rubric:: ``#include "function.h"``
+.. rubric:: ``#include "devlib/function.h"``
 
 |startovw|
 
@@ -92,13 +128,23 @@ Klasa ``Function`` i podklase
 
 |endcollapse|
 
-.. doxygenclass:: MultiFunction
-   :project: devlib
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: MultiFunction
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: MultiFunction
+         :project: devlib
 
 Klasa ``Device``
 ================
 
-.. rubric:: ``#include "device.h"``
+.. rubric:: ``#include "devlib/device.h"``
 
 |startovw|
 
@@ -107,13 +153,33 @@ Klasa ``Device``
 
 |endcollapse|
 
-.. doxygenclass:: Device
-   :project: devlib
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: Device
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: Device
+         :project: devlib
 
 Funkcije za rad sa JSON
 =======================
 
-.. rubric:: ``#include "json.h"``
+.. rubric:: ``#include "devlib/json.h"``
 
-.. doxygenfile:: json.h
-   :project: devlib
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenfile:: json.h
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenfile:: json.h
+         :project: devlib

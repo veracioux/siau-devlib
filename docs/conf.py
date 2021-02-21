@@ -7,7 +7,7 @@ author = 'Haris Gušić, Anes Hadžić, Džana Aldžić, Medina Gračo'
 # -- General configuration ---------------------------------------------------
 
 extensions = [
-        'sphinx.ext.todo', 'breathe'
+        'sphinx.ext.todo', 'breathe', 'sphinx_tabs.tabs'
 ]
 
 breathe_projects = { "devlib": "_build/doxygen/xml/" }

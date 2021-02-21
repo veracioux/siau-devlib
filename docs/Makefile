@@ -16,6 +16,7 @@ html: doxygen
 doxygen:
 	mkdir -p _build/doxygen
 	@doxygen
+	cd _build/ && mkdir -p html/doxygen && cp -r doxygen/html/* html/doxygen
 
 clean:
 	rm -rf _build/

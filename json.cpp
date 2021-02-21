@@ -1,24 +1,34 @@
 #include "json.h"
 
-Device jsonParseDevice(const QString &factoryFile, const QString &userFile)
+Device jsonParseDevice(const QString &factoryFile)
 {
     Device device;
     if (factoryFile == "") // No factory_device.json specified
         return device;
-    return {}; // TODO
+    return {}; // TODO implement
 }
 
-Data jsonParseValue(const QJsonObject &val)
+Data jsonParseData(const QJsonObject &data)
 {
-    return {}; // TODO
+    return {}; // TODO implement
 }
 
-Condition jsonParseCondition(const QJsonObject &val)
+SingleFunction jsonParseFunction(const QJsonObject &func)
 {
-    return {}; // TODO
+   // TODO implement
 }
 
-Function jsonParseFunction(const QJsonObject &func)
+MultiFunction jsonParseFunction(const QJsonArray &func)
 {
-    return {}; // TODO
+   // TODO implement
+}
+
+Condition jsonParseCondition(const QJsonObject &cond)
+{
+   // TODO implement
+}
+
+ValueSpec jsonParseValueSpec(const QJsonObject &obj)
+{
+   // TODO implement
 }
