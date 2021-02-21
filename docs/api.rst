@@ -45,9 +45,8 @@ Klasa ``Condition``
 Klasa ``Function``
 ==================
 
-
 .. include:: /inc/startov.rst
-.. image:: /_build/doxygen/html/classFunction__inh.svg
+.. image:: _build/doxygen/html/classFunction__inh.svg
    :align: center
 
 .. include:: /inc/enddetails.rst
