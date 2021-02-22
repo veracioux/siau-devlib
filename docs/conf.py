@@ -7,7 +7,7 @@ author = 'Haris Gušić, Anes Hadžić, Džana Aldžić, Medina Gračo'
 # -- General configuration ---------------------------------------------------
 
 extensions = [
-        'sphinx.ext.todo', 'breathe'
+        'sphinx.ext.todo', 'breathe', 'sphinx_tabs.tabs'
 ]
 
 breathe_projects = { "devlib": "_build/doxygen/xml/" }
@@ -22,9 +22,12 @@ templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', '_intermediate', 'inc', 'Thumbs.db', '.DS_Store']
 
 todo_include_todos = True
+default_role = 'envvar'
+
+exec(open('./include.py').read())
 
 # -- Options for HTML output -------------------------------------------------
 

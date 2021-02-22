@@ -6,13 +6,19 @@
 #include "data.h"
 
 #include <QString>
-#include <QMap>
 
-class DEVLIB_EXPORT Condition
+/**
+ * A condition to enable a device function.
+ *
+ * It is always of the format (*value of dataName*) = *value*.
+ *
+ * This class is meant to be used by the GUI/logic module.
+ * It not of interest for device programmers.
+ */
+struct DEVLIB_EXPORT Condition
 {
-    QString valueName;
+    QString dataName;
     QString value;
-public:
 };
 
 /**
@@ -20,6 +26,9 @@ public:
  */
 class DEVLIB_EXPORT Function
 {
+public:
+    virtual bool isSingleFunction() const = 0;
+    virtual bool isMultiFunction() const;
 };
 
 /**
@@ -27,14 +36,31 @@ class DEVLIB_EXPORT Function
  */
 class DEVLIB_EXPORT SingleFunction : public Function
 {
-    /** List of string attributes */
-    QMap<QString, QString> attr = {
-        {"name", ""},
-        {"friendly", ""},
-    };
+    QString name, friendlyName;
+    /**
+     * Defines the properties of the value that can be
+     * supplied to this function.
+     */
     ValueSpec valueSpec;
     /** Condition that makes this function available for use. */
     Condition condition;
+public:
+    SingleFunction(const QString &name, const QString &friendlyName,
+                   const ValueSpec &valueSpec, const Condition &condition = {});
+
+    // GETTERS
+    QString getName() const;
+    QString getFriendlyName() const;
+    ValueSpec getValueSpec() const;
+    Condition getCondition() const;
+
+    bool isSingleFunction() const override;
+
+    // SETTERS
+    void setName(const QString &name);
+    void setFriendlyName(const QString &friendly);
+    void setValueSpec(const ValueSpec &spec);
+    void setCondition(const Condition &condition);
 };
 
 /**
@@ -42,7 +68,19 @@ class DEVLIB_EXPORT SingleFunction : public Function
  */
 class DEVLIB_EXPORT MultiFunction : public Function
 {
-    QList<Function> subfunctions;
+    QList<SingleFunction> subfunctions;
+
+public:
+    MultiFunction(const QList<SingleFunction> &subfunctions);
+
+    // GETTERS
+    QList<SingleFunction> &getSubfunctions();
+    QList<SingleFunction> getSubfunctions() const;
+
+    bool isSingleFunction() const override;
+
+    // SETTERS
+    void setSubfunctions(const QList<SingleFunction> &subfunctions);
 };
 
 #endif // FUNCTION_H

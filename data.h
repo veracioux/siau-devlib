@@ -1,41 +1,25 @@
-/** @file value.h */
-#ifndef VALUE_H
-#define VALUE_H
+/** @file data.h */
+#ifndef DATA_H
+#define DATA_H
 
 #include "devlib_global.h"
 
+#include "value.h"
+
 #include <QList>
 #include <QString>
-#include <QMap>
-
-/**
- * Value specification. A tuple of (valueType, valueRange, unit).
- */
-class DEVLIB_EXPORT ValueSpec
-{
-    QString type, unit;
-    QList<QString> range;
-
-public:
-    // STATIC
-    static bool isValidIdentifier(const QString &type);
-    static bool isValidSpec(const QString &type, const QList<QString> range);
-
-    friend class Data;
-};
 
 /**
  * A value that can be received from a device.
  */
 class DEVLIB_EXPORT Data
 {
-    QString name, friendlyName, unit;
+    QString name, friendlyName;
     ValueSpec valueSpec;
 
 public:
-    // CONSTRUCTORS
-    /** The default constructor, does nothing. */
     Data() = default;
+    Data(const QString &name, const QString &friendlyName, const ValueSpec &valueSpec);
 
     // GETTERS
     QString getName() const;
@@ -44,17 +28,11 @@ public:
     ValueSpec getValueSpec() const;
 
     // SETTERS
-    void setName(QString name);
-    void setFriendlyName(QString name);
+    void setName(const QString &name);
+    void setFriendlyName(const QString &name);
     void setValueSpec(const ValueSpec &spec);
 
 private:
-    /* TODO find a use or remove
-    /**
-     * Helper function - assert that valueType is equal to `type`.
-     * @throws std::logic_error On assertion failure.
-    void assertType(const QString &type) const;
-    */
 };
 
-#endif // VALUE_H
+#endif // DATA_H

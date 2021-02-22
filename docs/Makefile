@@ -16,9 +16,7 @@ html: doxygen
 doxygen:
 	mkdir -p _build/doxygen
 	@doxygen
-	@for file in _build/doxygen/html/class*__inherit__graph.svg; do \
-		cp "$$file" "$$(echo "$$file" | sed 's/inherit__graph/inh/')"; \
-	done
+	cd _build/ && mkdir -p html/doxygen && cp -r doxygen/html/* html/doxygen
 
 clean:
 	rm -rf _build/

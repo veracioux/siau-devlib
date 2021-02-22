@@ -4,6 +4,9 @@ API dokumentacija
 
 .. toctree::
 
+U ovom odjeljku su prikazane funkcije koje se koriste za interfejs sa programima
+koji koriste ovu biblioteku.
+
 Globalni simboli
 ================
 
@@ -18,60 +21,184 @@ Globalni simboli
 Klasa ``ValueSpec``
 ===================
 
-.. doxygenclass:: ValueSpec
-   :project: devlib
+.. rubric:: ``#include "devlib/value.h"``
+
+|startovw|
+
+.. image:: _build/doxygen/html/classValueSpec__coll__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: ValueSpec
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: ValueSpec
+         :project: devlib
 
 Klasa ``Data``
 ==============
 
-.. include:: /inc/startov.rst
+.. rubric:: ``#include "devlib/data.h"``
+
+|startovw|
+
 .. image:: _build/doxygen/html/classData__coll__graph.svg
    :align: center
 
-.. include:: /inc/enddetails.rst
-.. raw:: html
+|endcollapse|
 
-   <br>
+.. tabs::
 
-.. doxygenclass:: Data
-   :project: devlib
+   .. tab:: Sažetak
 
-Klasa ``Condition``
-===================
+      .. doxygenclass:: Data
+         :project: devlib
+         :outline:
 
-.. doxygenclass:: Condition
-   :project: devlib
+   .. tab:: Detalji
 
-Klasa ``Function``
-==================
+      .. doxygenclass:: Data
+         :project: devlib
 
 
-.. include:: /inc/startov.rst
-.. image:: /_build/doxygen/html/classFunction__inh.svg
+Struktura ``Condition``
+=======================
+
+.. rubric:: ``#include "devlib/function.h"``
+
+|startovw|
+
+.. rubric:: **Dijagram klasa**
+.. image:: _build/doxygen/html/structCondition__coll__graph.svg
    :align: center
 
-.. include:: /inc/enddetails.rst
-.. raw:: html
+|endcollapse|
 
-   <br>
+.. tabs::
 
-.. doxygenclass:: Function
-   :project: devlib
+   .. tab:: Sažetak
 
-.. doxygenclass:: SingleFunction
-   :project: devlib
+      .. doxygenstruct:: Condition
+         :project: devlib
+         :outline:
 
-.. doxygenclass:: MultiFunction
-   :project: devlib
+   .. tab:: Detalji
+
+      .. doxygenstruct:: Condition
+         :project: devlib
+
+Klasa ``Function`` i podklase
+=============================
+
+.. rubric:: ``#include "devlib/function.h"``
+
+|startovw|
+
+.. rubric:: Dijagram klasa
+.. image:: _build/doxygen/html/classFunction__inherit__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: Function
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: Function
+         :project: devlib
+|startovw|
+
+.. image:: _build/doxygen/html/classSingleFunction__coll__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: SingleFunction
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: SingleFunction
+         :project: devlib
+
+|startovw|
+
+.. image:: _build/doxygen/html/classMultiFunction__coll__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: MultiFunction
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: MultiFunction
+         :project: devlib
 
 Klasa ``Device``
 ================
 
-.. doxygenclass:: Device
-   :project: devlib
+.. rubric:: ``#include "devlib/device.h"``
+
+|startovw|
+
+.. image:: _build/doxygen/html/classDevice__coll__graph.svg
+   :align: center
+
+|endcollapse|
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: Device
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: Device
+         :project: devlib
 
 Funkcije za rad sa JSON
 =======================
 
-.. doxygenfile:: json.h
-   :project: devlib
+.. rubric:: ``#include "devlib/json.h"``
+
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenfile:: json.h
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenfile:: json.h
+         :project: devlib
