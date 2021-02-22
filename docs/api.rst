@@ -77,7 +77,7 @@ Struktura ``Condition``
 |startovw|
 
 .. rubric:: **Dijagram klasa**
-.. image:: _build/doxygen/html/classCondition__coll__graph.svg
+.. image:: _build/doxygen/html/structCondition__coll__graph.svg
    :align: center
 
 |endcollapse|
