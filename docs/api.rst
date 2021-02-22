@@ -108,9 +108,18 @@ Klasa ``Function`` i podklase
 
 |endcollapse|
 
-.. doxygenclass:: Function
-   :project: devlib
+.. tabs::
 
+   .. tab:: Sažetak
+
+      .. doxygenclass:: Function
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: Function
+         :project: devlib
 |startovw|
 
 .. image:: _build/doxygen/html/classSingleFunction__coll__graph.svg
@@ -118,8 +127,18 @@ Klasa ``Function`` i podklase
 
 |endcollapse|
 
-.. doxygenclass:: SingleFunction
-   :project: devlib
+.. tabs::
+
+   .. tab:: Sažetak
+
+      .. doxygenclass:: SingleFunction
+         :project: devlib
+         :outline:
+
+   .. tab:: Detalji
+
+      .. doxygenclass:: SingleFunction
+         :project: devlib
 
 |startovw|
 
