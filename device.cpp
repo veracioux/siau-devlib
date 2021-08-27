@@ -12,9 +12,9 @@ QString Device::getVendorId() const
     return vendorId;
 }
 
-QString Device::getDeviceId() const
+QString Device::getModel() const
 {
-    return deviceId;
+    return model;
 }
 
 QList<Data> &Device::getData()
@@ -49,9 +49,9 @@ void Device::setVendorId(const QString &id)
     this->vendorId = id;
 }
 
-void Device::setDeviceId(const QString &id)
+void Device::setModel(const QString &id)
 {
-    this->deviceId = id;
+    this->model = id;
 }
 
 void Device::setData(const QList<Data> &data)
