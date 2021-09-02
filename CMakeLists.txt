@@ -15,6 +15,7 @@ add_library(devlib SHARED
     value.cpp
     data.cpp
     function.cpp
+    device.cpp
     json.cpp
     ############
     value.h

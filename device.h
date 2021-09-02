@@ -12,8 +12,8 @@
 
 class DEVLIB_EXPORT Device
 {
-    QString name, vendorId, model;
-    QList<Data> data;
+    QString name, vendorId, model, serialNo;
+    QList<Data*> data;
     QList<Function*> functions;
 
 public:
@@ -22,16 +22,15 @@ public:
     QString getName() const;
     QString getVendorId() const;
     QString getModel() const;
-    QList<Data> &getData();
-    QList<Data> getData() const;
+    QString getSerialNo() const;
+    QList<Data*> &getData();
     QList<Function*> &getFunctions();
-    QList<Function*> getFunctions() const;
 
     // SETTERS
     void setName(const QString &name);
     void setVendorId(const QString &id);
     void setModel(const QString &id);
-    void setData(const QList<Data> &data);
+    void setData(const QList<Data*> &data);
     void setFunctions(const QList<Function*> &functions);
 };
 

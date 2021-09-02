@@ -17,22 +17,18 @@ QString Device::getModel() const
     return model;
 }
 
-QList<Data> &Device::getData()
+QString Device::getSerialNo() const
 {
-    return values;
+    return serialNo;
 }
 
-QList<Data> Device::getData() const
+
+QList<Data*> &Device::getData()
 {
-    return values;
+    return data;
 }
 
-QList<Function> &Device::getFunctions()
-{
-    return functions;
-}
-
-QList<Function> Device::getFunctions() const
+QList<Function*> &Device::getFunctions()
 {
     return functions;
 }
@@ -54,12 +50,12 @@ void Device::setModel(const QString &id)
     this->model = id;
 }
 
-void Device::setData(const QList<Data> &data)
+void Device::setData(const QList<Data*> &data)
 {
     this->data = data;
 }
 
-void Device::setFunctions(const QList<Function> &functions)
+void Device::setFunctions(const QList<Function*> &functions)
 {
     this->functions = functions;
 }
