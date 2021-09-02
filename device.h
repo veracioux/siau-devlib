@@ -30,6 +30,7 @@ public:
     void setName(const QString &name);
     void setVendorId(const QString &id);
     void setModel(const QString &id);
+    void setSerialNo(const QString &serialNo);
     void setData(const QList<Data*> &data);
     void setFunctions(const QList<Function*> &functions);
 };

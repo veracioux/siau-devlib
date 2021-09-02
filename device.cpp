@@ -50,6 +50,10 @@ void Device::setModel(const QString &id)
     this->model = id;
 }
 
+void Device::setSerialNo(const QString &serialNo) {
+    this->serialNo = serialNo;
+}
+
 void Device::setData(const QList<Data*> &data)
 {
     this->data = data;

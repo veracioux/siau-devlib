@@ -11,20 +11,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # The library target
-add_library(devlib SHARED
-    value.cpp
-    data.cpp
-    function.cpp
-    device.cpp
-    json.cpp
-    ############
-    value.h
-    data.h
-    function.h
-    device.h
-    json.h
-    devlib_global.h
-)
+file(GLOB SOURCE_FILES *.cpp)
+add_library(devlib SHARED ${SOURCE_FILES})
 target_compile_definitions(devlib PRIVATE DEVLIB_LIBRARY)
 
 # Dependencies
