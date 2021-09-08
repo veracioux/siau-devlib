@@ -17,7 +17,7 @@ class DEVLIB_EXPORT Device
     QList<Function*> functions;
 
 public:
-
+    virtual ~Device();
     // GETTERS
     QString getName() const;
     QString getVendorId() const;

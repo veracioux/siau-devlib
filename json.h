@@ -4,13 +4,13 @@
 
 #include "devlib_global.h"
 
-#include "value.h"
+#include "data.h"
 #include "device.h"
 #include "function.h"
-#include "data.h"
+#include "valuespec.h"
 
-#include <QJsonObject>
 #include <QJsonArray>
+#include <QJsonObject>
 
 // THE MOST IMPORTANT OBJECTS
 /**
@@ -27,22 +27,23 @@ Device DEVLIB_EXPORT jsonParseDevice(const QString &factoryFile);
 /**
  * Parse a device data object and return a `Data` object.
  *
- * @throws std::logic_error If `data` cannot be parsed into a valid `Data` object.
+ * @throws std::logic_error If `data` cannot be parsed into a valid `Data`
+ * object.
  */
-Data DEVLIB_EXPORT jsonParseData(const QJsonObject &data);
+Data DEVLIB_EXPORT *jsonParseData(const QJsonObject &data);
 /**
  * Parse a JSON object `func` and return a `SingleFunction`.
  *
  * @throws std::logic_error If `func` cannot be parsed into a valid
  * `SingleFunction` object.
  */
-SingleFunction DEVLIB_EXPORT jsonParseFunction(const QJsonObject &func);
+SingleFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonObject &func);
 /**
  * Parse a JSON object `func` and return a `MultiFunction`.
  *
  * @throws std::logic_error If `func` contains invalid `SingleFunction` objects.
  */
-MultiFunction DEVLIB_EXPORT jsonParseFunction(const QJsonArray &func);
+MultiFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonArray &func);
 
 // HELPER OBJECTS
 /**

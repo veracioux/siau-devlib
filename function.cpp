@@ -15,6 +15,10 @@ bool Function::isMultiFunction() const
 
 // CONSTRUCTORS
 
+SingleFunction::SingleFunction()
+{
+}
+
 SingleFunction::SingleFunction(const QString &name, const QString &friendlyName,
                                const ValueSpec &valueSpec, const Condition &condition)
     : name(name), friendlyName(friendlyName), valueSpec(valueSpec), condition(condition)
@@ -79,7 +83,7 @@ bool MultiFunction::isSingleFunction() const
     return false;
 }
 
-void MultiFunction::setSubfunctions(const QList<SingleFunction> &subfunctions)
+void MultiFunction::setSubfunctions(const QList<SingleFunction*> &subfunctions)
 {
     this->subfunctions = subfunctions;
 }

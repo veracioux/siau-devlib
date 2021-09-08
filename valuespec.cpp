@@ -1,4 +1,4 @@
-#include "value.h"
+#include "valuespec.h"
 
 #include <limits>
 
@@ -6,7 +6,7 @@
 
 void ValueSpec::throwIncompatible()
 {
-    throw std::logic_error("The value type and range are incompatible");
+    throw std::domain_error("Incompatible value type and range");
 }
 
 // CONSTRUCTOR
@@ -20,26 +20,26 @@ ValueSpec::ValueSpec(const QString &type, const QList<QString> range,
 
 // STATIC
 
-bool ValueSpec::isValidIdentifier(const QString &type)
+bool ValueSpec::isValidType(const QString &type)
 {
-    // TODO implement
-    // Just check if type contains a valid C++ identifier.
-    return true;
+    return QRegExp("[_a-zA-Z][_a-zA-Z0-9]*").exactMatch(type);
 }
 
 bool ValueSpec::isValidSpec(const QString &type,
                             const QList<QString> range)
 {
-    if (!ValueSpec::isValidIdentifier(type))
+    if (!ValueSpec::isValidType(type))
         return false;
     // For number types, range can be empty (no limits)
     // or an array of two values (an interval)
     if ((type == "float" || type == "int")
-        && (range.size() != 0 && range.size() != 2))
+        && (!range.isEmpty() && range.size() != 2))
         return false;
 
     if (type == "float")
     {
+        if (range.isEmpty())
+            return true;
         // Can the values be converted to float?
         bool conversionOk;
         range[0].toFloat(&conversionOk);
@@ -49,6 +49,8 @@ bool ValueSpec::isValidSpec(const QString &type,
     }
     else if (type == "int")
     {
+        if (range.isEmpty())
+            return true;
         // Can the values be converted to float?
         bool conversionOk;
         range[0].toInt(&conversionOk);
@@ -56,8 +58,14 @@ bool ValueSpec::isValidSpec(const QString &type,
         range[1].toInt(&conversionOk);
         if (!conversionOk) return false;
     }
-    else if (type == "void")
-        return range.empty();
+    else if (type == "void" || type == "bool") {
+        return range.isEmpty();
+    } else { // custom enum
+        if (range.isEmpty()) return false;
+        for (const QString &val : range)
+            if (!isValidType(val))
+                return false;
+    }
     return true;
 }
 
@@ -108,7 +116,7 @@ float ValueSpec::getMinFloat() const
     if (!isFloat())
         throw std::logic_error("The ValueSpec type is not float");
     if (range.empty())
-        return -1e6;
+        return 0.0 / 0.0; // NaN
     else
         return range[0].toFloat();
 }
@@ -118,12 +126,12 @@ float ValueSpec::getMaxFloat() const
     if (!isFloat())
         throw std::logic_error("The ValueSpec type is not float");
     if (range.empty())
-        return 1e6;
+        return 0.0 / 0.0; // NaN
     else
         return range[1].toFloat();
 }
 
-float ValueSpec::getMinInt() const
+int ValueSpec::getMinInt() const
 {
     if (!isInt())
         throw std::logic_error("The ValueSpec type is not int");
@@ -133,7 +141,7 @@ float ValueSpec::getMinInt() const
         return range[0].toInt();
 }
 
-float ValueSpec::getMaxInt() const
+int ValueSpec::getMaxInt() const
 {
     if (!isInt())
         throw std::logic_error("The ValueSpec type is not int");
@@ -163,13 +171,10 @@ void ValueSpec::setValueRange(const QList<QString> &range)
 
 void ValueSpec::setSpec(const QString &type, const QList<QString> &range)
 {
-    if (isValidSpec(type, range))
-    {
-        this->type = type;
-        this->range = range;
-    }
-    else
+    if (!isValidSpec(type, range))
         throwIncompatible();
+    this->type = type;
+    this->range = range;
 }
 
 void ValueSpec::setSpec(const QString &type, const QList<QString> &range,
@@ -181,5 +186,5 @@ void ValueSpec::setSpec(const QString &type, const QList<QString> &range,
 
 void ValueSpec::setUnit(const QString &unit)
 {
-
+    this->unit = unit;
 }

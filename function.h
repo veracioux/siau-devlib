@@ -45,6 +45,8 @@ class DEVLIB_EXPORT SingleFunction : public Function
     /** Condition that makes this function available for use. */
     Condition condition;
 public:
+    SingleFunction();
+    virtual ~SingleFunction() = default;
     SingleFunction(const QString &name, const QString &friendlyName,
                    const ValueSpec &valueSpec, const Condition &condition = {});
 
@@ -68,19 +70,20 @@ public:
  */
 class DEVLIB_EXPORT MultiFunction : public Function
 {
-    QList<SingleFunction> subfunctions;
+    QList<SingleFunction*> subfunctions;
 
 public:
     MultiFunction(const QList<SingleFunction> &subfunctions);
+    virtual ~MultiFunction() = default;
 
     // GETTERS
-    QList<SingleFunction> &getSubfunctions();
-    QList<SingleFunction> getSubfunctions() const;
+    QList<SingleFunction*> &getSubfunctions();
+    QList<SingleFunction*> getSubfunctions() const;
 
     bool isSingleFunction() const override;
 
     // SETTERS
-    void setSubfunctions(const QList<SingleFunction> &subfunctions);
+    void setSubfunctions(const QList<SingleFunction*> &subfunctions);
 };
 
 #endif // FUNCTION_H

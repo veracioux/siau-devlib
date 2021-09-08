@@ -1,6 +1,6 @@
 /** @file value.h */
-#ifndef VALUE_H
-#define VALUE_H
+#ifndef VALUESPEC_H
+#define VALUESPEC_H
 
 #include "devlib_global.h"
 
@@ -16,7 +16,7 @@
  */
 class DEVLIB_EXPORT ValueSpec
 {
-    QString type, unit;
+    QString type = QStringLiteral("void"), unit;
     QList<QString> range;
 
 private:
@@ -45,7 +45,7 @@ public:
 
     // STATIC
     /** Test if `type` is a valid C++ identifier. */
-    static bool isValidIdentifier(const QString &type);
+    static bool isValidType(const QString &type);
     /**
      * Test if the pair (`type`, `range`) can be used to create a
      * valid `ValueSpec`.
@@ -80,13 +80,13 @@ public:
      *
      * @throws std::logic_error If this `ValueSpec` is not of type `int`.
      */
-    float getMinInt() const;
+    int getMinInt() const;
     /**
      * Return the maximum value of this `ValueSpec` if it is of type `int`.
      *
      * @throws std::logic_error If this `ValueSpec` is not of type `int`.
      */
-    float getMaxInt() const;
+    int getMaxInt() const;
 
     // Add to/from byte array method or similar?
 
@@ -113,4 +113,4 @@ public:
     friend class Data;
 };
 
-#endif // VALUE_H
+#endif // VALUESPEC_H

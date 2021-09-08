@@ -2,6 +2,12 @@
 
 // GETTERS
 
+Device::~Device()
+{
+    qDeleteAll(functions);
+    qDeleteAll(data);
+}
+
 QString Device::getName() const
 {
     return name;

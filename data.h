@@ -4,7 +4,7 @@
 
 #include "devlib_global.h"
 
-#include "value.h"
+#include "valuespec.h"
 
 #include <QList>
 #include <QString>
