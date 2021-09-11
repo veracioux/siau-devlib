@@ -1,0 +1,17 @@
+{
+    "valueTypeArray": {
+        "valueType": []
+    },
+    "valueTypeInt": {
+        "valueType": 1
+    },
+    "valueRangeInt": {
+        "valueRange": 1
+    },
+    "valueRangeItemsWrongType": {
+        "valueRange": [ 1, [] ]
+    },
+    "typeIntRangeStringArray": {
+        "valueType": "int", "valueRange": [ "1", "2" ]
+    }
+}

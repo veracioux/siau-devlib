@@ -1,0 +1,5 @@
+{
+    "name": "AnInt", "friendly": "An integer",
+    "valueType": "int", "valueRange": [-5, 40],
+    "unit": "%"
+}

@@ -1,0 +1,4 @@
+{
+    "name": "setBrightness", "friendly": "Set Brightness",
+    "valueType": "float", "valueRange": [ 0.0, 100.0 ], "unit": "%"
+}

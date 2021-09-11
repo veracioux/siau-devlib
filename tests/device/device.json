@@ -1,0 +1,19 @@
+{
+    "name": "TestDevice",
+    "vendorId": "ETF",
+    "model": "Model-X",
+    "deviceType": "Generic",
+    "functions": [
+        {
+            "name": "setBrightness", "friendly": "Set Brightness",
+            "valueType": "float", "valueRange": [ 0.0, 100.0 ], "unit": "%"
+        }
+    ],
+    "data": [
+        {
+            "name": "getBrightness", "friendly": "Brightness",
+            "valueType": "int", "valueRange": [-5, 40],
+            "unit": "%"
+        }
+    ]
+}
