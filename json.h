@@ -51,7 +51,7 @@ MultiFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonArray &func);
  *
  * @throws std::logic_error If `cond` cannot be parsed into a valid `Condition`.
  */
-Condition DEVLIB_EXPORT jsonParseCondition(const QJsonObject &cond);
+Condition DEVLIB_EXPORT jsonParseCondition(const QString &cond);
 /**
  * Parse the JSON object `valueSpec` and return a `ValueSpec` object.
  *
