@@ -22,7 +22,7 @@
  *
  * @throws std::logic_error If the file cannot be parsed into a device.
  */
-Device DEVLIB_EXPORT jsonParseDevice(const QString &factoryFile);
+Device DEVLIB_EXPORT jsonParseDevice(const QString& factoryFile);
 // TODO LATER Add parsing for user_device.json
 /**
  * Parse a device data object and return a `Data` object.
@@ -30,20 +30,20 @@ Device DEVLIB_EXPORT jsonParseDevice(const QString &factoryFile);
  * @throws std::logic_error If `data` cannot be parsed into a valid `Data`
  * object.
  */
-Data DEVLIB_EXPORT *jsonParseData(const QJsonObject &data);
+Data DEVLIB_EXPORT* jsonParseData(const QJsonObject& data);
 /**
  * Parse a JSON object `func` and return a `SingleFunction`.
  *
  * @throws std::logic_error If `func` cannot be parsed into a valid
  * `SingleFunction` object.
  */
-SingleFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonObject &func);
+SingleFunction DEVLIB_EXPORT* jsonParseFunction(const QJsonObject& func);
 /**
  * Parse a JSON object `func` and return a `MultiFunction`.
  *
  * @throws std::logic_error If `func` contains invalid `SingleFunction` objects.
  */
-MultiFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonArray &func);
+MultiFunction DEVLIB_EXPORT* jsonParseFunction(const QJsonArray& func);
 
 // HELPER OBJECTS
 /**
@@ -51,7 +51,7 @@ MultiFunction DEVLIB_EXPORT *jsonParseFunction(const QJsonArray &func);
  *
  * @throws std::logic_error If `cond` cannot be parsed into a valid `Condition`.
  */
-Condition DEVLIB_EXPORT jsonParseCondition(const QString &cond);
+Condition DEVLIB_EXPORT jsonParseCondition(const QString& cond);
 /**
  * Parse the JSON object `valueSpec` and return a `ValueSpec` object.
  *
@@ -63,6 +63,6 @@ Condition DEVLIB_EXPORT jsonParseCondition(const QString &cond);
  *
  * @throws std::logic_error If `valueSpec` does not contain a valid `ValueSpec`.
  */
-ValueSpec DEVLIB_EXPORT jsonParseValueSpec(const QJsonObject &obj);
+ValueSpec DEVLIB_EXPORT jsonParseValueSpec(const QJsonObject& obj);
 
 #endif // JSON_H

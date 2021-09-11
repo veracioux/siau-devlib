@@ -12,27 +12,29 @@
 /**
  * A value that can be received from a device.
  */
-class DEVLIB_EXPORT Data {
+class DEVLIB_EXPORT Data
+{
     QString name, friendlyName;
     ValueSpec valueSpec;
 
-  public:
+public:
     Data() = default;
-    Data(const QString &name, const QString &friendlyName,
-         const ValueSpec &valueSpec);
+    Data(const QString& name,
+         const QString& friendlyName,
+         const ValueSpec& valueSpec);
 
     // GETTERS
     QString getName() const;
     QString getFriendlyName() const;
-    ValueSpec &getValueSpec();
+    ValueSpec& getValueSpec();
     ValueSpec getValueSpec() const;
 
     // SETTERS
-    void setName(const QString &name);
-    void setFriendlyName(const QString &name);
-    void setValueSpec(const ValueSpec &spec);
+    void setName(const QString& name);
+    void setFriendlyName(const QString& name);
+    void setValueSpec(const ValueSpec& spec);
 
-  private:
+private:
 };
 
 #endif // DATA_H

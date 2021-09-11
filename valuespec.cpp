@@ -4,13 +4,16 @@
 
 // PRIVATE HELPER FUNCTIONS
 
-void ValueSpec::throwIncompatible() {
+void ValueSpec::throwIncompatible()
+{
     throw std::domain_error("Incompatible value type and range");
 }
 
 // CONSTRUCTOR
-ValueSpec::ValueSpec(const QString &type, const QList<QString> range,
-                     const QString &unit) {
+ValueSpec::ValueSpec(const QString& type,
+                     const QList<QString> range,
+                     const QString& unit)
+{
     if (!isValidSpec(type, range))
         throwIncompatible();
     setSpec(type, range, unit);
@@ -18,11 +21,13 @@ ValueSpec::ValueSpec(const QString &type, const QList<QString> range,
 
 // STATIC
 
-bool ValueSpec::isValidType(const QString &type) {
+bool ValueSpec::isValidType(const QString& type)
+{
     return QRegExp("[_a-zA-Z][_a-zA-Z0-9]*").exactMatch(type);
 }
 
-bool ValueSpec::isValidSpec(const QString &type, const QList<QString> range) {
+bool ValueSpec::isValidSpec(const QString& type, const QList<QString> range)
+{
     if (!ValueSpec::isValidType(type))
         return false;
     // For number types, range can be empty (no limits)
@@ -58,7 +63,7 @@ bool ValueSpec::isValidSpec(const QString &type, const QList<QString> range) {
     } else { // custom enum
         if (range.isEmpty())
             return false;
-        for (const QString &val : range)
+        for (const QString& val : range)
             if (!isValidType(val))
                 return false;
     }
@@ -67,25 +72,48 @@ bool ValueSpec::isValidSpec(const QString &type, const QList<QString> range) {
 
 // GETTERS
 
-QString ValueSpec::getValueType() const { return type; }
+QString ValueSpec::getValueType() const
+{
+    return type;
+}
 
-QList<QString> ValueSpec::getValueRange() const { return range; }
+QList<QString> ValueSpec::getValueRange() const
+{
+    return range;
+}
 
-QString ValueSpec::getUnit() const { return unit; }
+QString ValueSpec::getUnit() const
+{
+    return unit;
+}
 /*****/
-bool ValueSpec::isFloat() const { return type == "float"; }
+bool ValueSpec::isFloat() const
+{
+    return type == "float";
+}
 
-bool ValueSpec::isInt() const { return type == "int"; }
+bool ValueSpec::isInt() const
+{
+    return type == "int";
+}
 
-bool ValueSpec::isBool() const { return type == "bool"; }
+bool ValueSpec::isBool() const
+{
+    return type == "bool";
+}
 
-bool ValueSpec::isVoid() const { return type == "void"; }
+bool ValueSpec::isVoid() const
+{
+    return type == "void";
+}
 
-bool ValueSpec::isCustomEnum() const {
+bool ValueSpec::isCustomEnum() const
+{
     return !isFloat() && !isInt() && !isBool() && !isVoid();
 }
 /*****/
-float ValueSpec::getMinFloat() const {
+float ValueSpec::getMinFloat() const
+{
     if (!isFloat())
         throw std::logic_error("The ValueSpec type is not float");
     if (range.empty())
@@ -94,7 +122,8 @@ float ValueSpec::getMinFloat() const {
         return range[0].toFloat();
 }
 
-float ValueSpec::getMaxFloat() const {
+float ValueSpec::getMaxFloat() const
+{
     if (!isFloat())
         throw std::logic_error("The ValueSpec type is not float");
     if (range.empty())
@@ -103,7 +132,8 @@ float ValueSpec::getMaxFloat() const {
         return range[1].toFloat();
 }
 
-int ValueSpec::getMinInt() const {
+int ValueSpec::getMinInt() const
+{
     if (!isInt())
         throw std::logic_error("The ValueSpec type is not int");
     if (range.empty())
@@ -112,7 +142,8 @@ int ValueSpec::getMinInt() const {
         return range[0].toInt();
 }
 
-int ValueSpec::getMaxInt() const {
+int ValueSpec::getMaxInt() const
+{
     if (!isInt())
         throw std::logic_error("The ValueSpec type is not int");
     if (range.empty())
@@ -123,31 +154,39 @@ int ValueSpec::getMaxInt() const {
 
 // SETTERS
 
-void ValueSpec::setValueType(const QString &type) {
+void ValueSpec::setValueType(const QString& type)
+{
     if (isValidSpec(type, range))
         this->type = type;
     else
         throwIncompatible();
 }
 
-void ValueSpec::setValueRange(const QList<QString> &range) {
+void ValueSpec::setValueRange(const QList<QString>& range)
+{
     if (isValidSpec(type, range))
         this->range = range;
     else
         throwIncompatible();
 }
 
-void ValueSpec::setSpec(const QString &type, const QList<QString> &range) {
+void ValueSpec::setSpec(const QString& type, const QList<QString>& range)
+{
     if (!isValidSpec(type, range))
         throwIncompatible();
     this->type = type;
     this->range = range;
 }
 
-void ValueSpec::setSpec(const QString &type, const QList<QString> &range,
-                        const QString &unit) {
+void ValueSpec::setSpec(const QString& type,
+                        const QList<QString>& range,
+                        const QString& unit)
+{
     setSpec(type, range);
     this->unit = unit;
 }
 
-void ValueSpec::setUnit(const QString &unit) { this->unit = unit; }
+void ValueSpec::setUnit(const QString& unit)
+{
+    this->unit = unit;
+}
