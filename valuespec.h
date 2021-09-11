@@ -4,8 +4,8 @@
 
 #include "devlib_global.h"
 
-#include <QString>
 #include <QList>
+#include <QString>
 
 /**
  * Value specification. A tuple of (valueType, valueRange, unit).
@@ -14,20 +14,18 @@
  * range of possible values and unit of measurement.
  *
  */
-class DEVLIB_EXPORT ValueSpec
-{
+class DEVLIB_EXPORT ValueSpec {
     QString type = QStringLiteral("void"), unit;
     QList<QString> range;
 
-private:
+  private:
     /**
      * Helper method that throws an exception signalling that
      * type and unit are incompatible
      */
     void throwIncompatible();
 
-public:
-
+  public:
     // CONSTRUCTORS
     /** Default constructor */
     ValueSpec() = default;

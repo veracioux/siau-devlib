@@ -5,9 +5,9 @@
 #include <QtCore/QtGlobal>
 
 #if defined(DEVLIB_LIBRARY)
-#    define DEVLIB_EXPORT Q_DECL_EXPORT
+#define DEVLIB_EXPORT Q_DECL_EXPORT
 #else
-#    define DEVLIB_EXPORT Q_DECL_IMPORT
+#define DEVLIB_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // DEVLIB_GLOBAL_H

@@ -2,8 +2,8 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-#include "devlib_global.h"
 #include "data.h"
+#include "devlib_global.h"
 
 #include <QString>
 
@@ -15,8 +15,7 @@
  * This class is meant to be used by the GUI/logic module.
  * It not of interest for device programmers.
  */
-struct DEVLIB_EXPORT Condition
-{
+struct DEVLIB_EXPORT Condition {
     QString dataName;
     QString value;
 };
@@ -24,9 +23,8 @@ struct DEVLIB_EXPORT Condition
 /**
  * A function that a device can perform.
  */
-class DEVLIB_EXPORT Function
-{
-public:
+class DEVLIB_EXPORT Function {
+  public:
     virtual bool isSingleFunction() const = 0;
     virtual bool isMultiFunction() const;
 };
@@ -34,8 +32,7 @@ public:
 /**
  * An atomic function that is not made up of any subfunctions.
  */
-class DEVLIB_EXPORT SingleFunction : public Function
-{
+class DEVLIB_EXPORT SingleFunction : public Function {
     QString name, friendlyName;
     /**
      * Defines the properties of the value that can be
@@ -44,7 +41,8 @@ class DEVLIB_EXPORT SingleFunction : public Function
     ValueSpec valueSpec;
     /** Condition that makes this function available for use. */
     Condition condition;
-public:
+
+  public:
     SingleFunction();
     virtual ~SingleFunction() = default;
     SingleFunction(const QString &name, const QString &friendlyName,
@@ -68,22 +66,21 @@ public:
 /**
  * A function that is wholly made up of other subfunctions.
  */
-class DEVLIB_EXPORT MultiFunction : public Function
-{
-    QList<SingleFunction*> subfunctions;
+class DEVLIB_EXPORT MultiFunction : public Function {
+    QList<SingleFunction *> subfunctions;
 
-public:
+  public:
     MultiFunction(const QList<SingleFunction> &subfunctions);
     virtual ~MultiFunction() = default;
 
     // GETTERS
-    QList<SingleFunction*> &getSubfunctions();
-    QList<SingleFunction*> getSubfunctions() const;
+    QList<SingleFunction *> &getSubfunctions();
+    QList<SingleFunction *> getSubfunctions() const;
 
     bool isSingleFunction() const override;
 
     // SETTERS
-    void setSubfunctions(const QList<SingleFunction*> &subfunctions);
+    void setSubfunctions(const QList<SingleFunction *> &subfunctions);
 };
 
 #endif // FUNCTION_H
