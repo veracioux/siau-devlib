@@ -10,13 +10,17 @@
 #include <QMap>
 #include <QString>
 
+namespace Devlib
+{
+
 class DEVLIB_EXPORT Device
 {
     QMap<QString, QString> values = { { "name", "" },
                                       { "vendorId", "" },
                                       { "model", "" },
                                       { "serialNo", "" },
-                                      { "deviceType", "" } };
+                                      { "deviceType", "" },
+                                      { "desc", ""}};
     QList<Data*> data;
     QList<Function*> functions;
 
@@ -40,5 +44,7 @@ public:
     void setData(const QList<Data*>& data);
     void setFunctions(const QList<Function*>& functions);
 };
+
+}
 
 #endif // DEVICE_H

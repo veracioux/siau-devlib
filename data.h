@@ -9,6 +9,9 @@
 #include <QList>
 #include <QString>
 
+namespace Devlib
+{
+
 /**
  * A value that can be received from a device.
  */
@@ -36,5 +39,7 @@ public:
 
 private:
 };
+
+}
 
 #endif // DATA_H

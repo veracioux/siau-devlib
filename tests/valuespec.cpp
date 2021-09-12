@@ -1,11 +1,13 @@
 #include "valuespec.h"
 #include <QtTest/QtTest>
 
+using namespace Devlib;
+
 class TestValueSpec : public QObject
 {
     Q_OBJECT
 
-    using VS = ValueSpec;
+    using VS = Devlib::ValueSpec;
 private slots:
 
     void testIsValidType()

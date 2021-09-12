@@ -1,5 +1,7 @@
 #include "device.h"
 
+using namespace Devlib;
+
 // GETTERS
 
 Device::~Device()

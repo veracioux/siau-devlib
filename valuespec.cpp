@@ -1,21 +1,29 @@
 #include "valuespec.h"
+#include "util.h"
 
 #include <limits>
 
+using namespace Devlib;
+
 // PRIVATE HELPER FUNCTIONS
 
-void ValueSpec::throwIncompatible()
+void throwIncompatible(const QString& type, const QStringList& range)
 {
-    throw std::domain_error("Incompatible value type and range");
+    throw std::domain_error(QStringLiteral("Incompatible value type and range\n"
+                                           "Value type: %1\n"
+                                           "Value range: [%2]")
+                              .arg(type)
+                              .arg(range.join(", "))
+                              .toStdString());
 }
 
 // CONSTRUCTOR
 ValueSpec::ValueSpec(const QString& type,
-                     const QList<QString> range,
+                     const QStringList range,
                      const QString& unit)
 {
     if (!isValidSpec(type, range))
-        throwIncompatible();
+        throwIncompatible(type, range);
     setSpec(type, range, unit);
 }
 
@@ -23,10 +31,10 @@ ValueSpec::ValueSpec(const QString& type,
 
 bool ValueSpec::isValidType(const QString& type)
 {
-    return QRegExp("[_a-zA-Z][_a-zA-Z0-9]*").exactMatch(type);
+    return validIdentifiers().exactMatch(type);
 }
 
-bool ValueSpec::isValidSpec(const QString& type, const QList<QString> range)
+bool ValueSpec::isValidSpec(const QString& type, const QStringList& range)
 {
     if (!ValueSpec::isValidType(type))
         return false;
@@ -77,7 +85,7 @@ QString ValueSpec::getValueType() const
     return type;
 }
 
-QList<QString> ValueSpec::getValueRange() const
+QStringList ValueSpec::getValueRange() const
 {
     return range;
 }
@@ -159,27 +167,27 @@ void ValueSpec::setValueType(const QString& type)
     if (isValidSpec(type, range))
         this->type = type;
     else
-        throwIncompatible();
+        throwIncompatible(type, range);
 }
 
-void ValueSpec::setValueRange(const QList<QString>& range)
+void ValueSpec::setValueRange(const QStringList& range)
 {
     if (isValidSpec(type, range))
         this->range = range;
     else
-        throwIncompatible();
+        throwIncompatible(type, range);
 }
 
-void ValueSpec::setSpec(const QString& type, const QList<QString>& range)
+void ValueSpec::setSpec(const QString& type, const QStringList& range)
 {
     if (!isValidSpec(type, range))
-        throwIncompatible();
+        throwIncompatible(type, range);
     this->type = type;
     this->range = range;
 }
 
 void ValueSpec::setSpec(const QString& type,
-                        const QList<QString>& range,
+                        const QStringList& range,
                         const QString& unit)
 {
     setSpec(type, range);

@@ -7,13 +7,18 @@
 
 using namespace std;
 
-QList<QString> _parseValueRangee(const QJsonValue& valueRange,
-                                 const ValueSpec& spec)
+namespace Devlib
+{
+
+QStringList _parseValueRange(const QJsonValue& valueRange, const QString& valueType)
 {
     QList<QString> range;
+    ValueSpec dummySpec;
+    // Bypass error checking
+    dummySpec.type = valueType;
     foreach (const QJsonValue& val, valueRange.toArray()) {
-        if (((spec.isInt() || spec.isFloat()) && !val.isDouble()) ||
-            (spec.isCustomEnum() && !val.isString()) || val.isArray() ||
+        if (((dummySpec.isInt() || dummySpec.isFloat()) && !val.isDouble()) ||
+            (dummySpec.isCustomEnum() && !val.isString()) || val.isArray() ||
             val.isObject()) {
             throw std::runtime_error("valueRange has invalid JSON type");
         }
@@ -40,9 +45,8 @@ ValueSpec jsonParseValueSpec(const QJsonObject& obj)
     if (valueType.isUndefined())
         valueType = "void";
 
-    spec.setValueType(valueType.toString());
+    spec.setSpec(valueType.toString(), _parseValueRange(valueRange, valueType.toString()));
     spec.setUnit(obj["unit"].toString());
-    spec.setValueRange(_parseValueRangee(valueRange, spec));
     return spec;
 }
 
@@ -145,8 +149,6 @@ Device jsonParseDevice(const QString& factoryFile)
 
     QFile file(factoryFile);
     Device device;
-    QList<Data*> datas;
-    QList<Function*> functions;
 
     QJsonObject jsonObject = jsonObjectFromFile(factoryFile);
 
@@ -170,10 +172,7 @@ Device jsonParseDevice(const QString& factoryFile)
     return device;
 
 unknown_attribute:
-    throw std::runtime_error("Unknown device attribute: ");
+    throw std::runtime_error("Unknown device attribute: "); // TODO
 }
 
-int main()
-{
-    return 0;
 }

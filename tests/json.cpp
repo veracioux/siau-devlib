@@ -9,7 +9,12 @@
 #include <limits>
 #include <unistd.h>
 
+using namespace Devlib;
+
+namespace Devlib
+{
 extern QJsonObject jsonObjectFromFile(const QString&);
+}
 
 class TestJson : public QObject
 {
@@ -44,6 +49,14 @@ private slots:
         QVERIFY(spec.isFloat());
         QCOMPARE(spec.getMinFloat(), 0.3f);
         QCOMPARE(spec.getMaxFloat(), 2.3f);
+    }
+
+    void testValueSpecCustomEnum()
+    {
+        auto spec = specFromFile("valuespec/enum.json");
+        QVERIFY(spec.isCustomEnum());
+        QCOMPARE(spec.getValueType(), "Status");
+        QCOMPARE(spec.getValueRange(), (QStringList{"On", "Off"}));
     }
 
     void testValueSpecFloat_OnlyType()

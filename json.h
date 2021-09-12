@@ -12,6 +12,9 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
+namespace Devlib
+{
+
 // THE MOST IMPORTANT OBJECTS
 /**
  * Parse the contents of *factory_device.json* and *user_device.json* and
@@ -64,5 +67,7 @@ Condition DEVLIB_EXPORT jsonParseCondition(const QString& cond);
  * @throws std::logic_error If `valueSpec` does not contain a valid `ValueSpec`.
  */
 ValueSpec DEVLIB_EXPORT jsonParseValueSpec(const QJsonObject& obj);
+
+}
 
 #endif // JSON_H

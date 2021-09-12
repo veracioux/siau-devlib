@@ -6,6 +6,10 @@
 
 #include <QList>
 #include <QString>
+#include <QJsonValue>
+
+namespace Devlib
+{
 
 /**
  * Value specification. A tuple of (valueType, valueRange, unit).
@@ -17,14 +21,7 @@
 class DEVLIB_EXPORT ValueSpec
 {
     QString type = QStringLiteral("void"), unit;
-    QList<QString> range;
-
-private:
-    /**
-     * Helper method that throws an exception signalling that
-     * type and unit are incompatible
-     */
-    void throwIncompatible();
+    QStringList range;
 
 public:
     // CONSTRUCTORS
@@ -40,7 +37,7 @@ public:
      * `ValueSpec`.
      */
     ValueSpec(const QString& type,
-              const QList<QString> range,
+              const QStringList range,
               const QString& unit = "");
 
     // STATIC
@@ -50,11 +47,11 @@ public:
      * Test if the pair (`type`, `range`) can be used to create a
      * valid `ValueSpec`.
      */
-    static bool isValidSpec(const QString& type, const QList<QString> range);
+    static bool isValidSpec(const QString& type, const QStringList& range);
 
     // GETTERS
     QString getValueType() const;
-    QList<QString> getValueRange() const;
+    QStringList getValueRange() const;
     QString getUnit() const;
 
     bool isFloat() const;
@@ -104,14 +101,18 @@ public:
      * @throws std::logic_error If `range` is not compatible with the value
      * type of this object.
      */
-    void setValueRange(const QList<QString>& range);
-    void setSpec(const QString& type, const QList<QString>& range);
+    void setValueRange(const QStringList& range);
+    void setSpec(const QString& type, const QStringList& range);
     void setSpec(const QString& type,
-                 const QList<QString>& range,
+                 const QStringList& range,
                  const QString& unit);
     void setUnit(const QString& unit);
 
     friend class Data;
+    friend QStringList _parseValueRange(const QJsonValue& valueRange,
+                     const QString& valueType);
 };
+
+}
 
 #endif // VALUESPEC_H

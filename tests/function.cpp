@@ -5,7 +5,7 @@ class TestFunction : public QObject
 {
     Q_OBJECT
 
-    using VS = ValueSpec;
+    using VS = Devlib::ValueSpec;
 private slots:
 };
 

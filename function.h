@@ -7,6 +7,9 @@
 
 #include <QString>
 
+namespace Devlib
+{
+
 /**
  * A condition to enable a device function.
  *
@@ -88,5 +91,7 @@ public:
     // SETTERS
     void setSubfunctions(const QList<SingleFunction*>& subfunctions);
 };
+
+}
 
 #endif // FUNCTION_H

@@ -1,5 +1,7 @@
 #include "data.h"
 
+using namespace Devlib;
+
 // CONSTRUCTORS
 
 Data::Data(const QString& name,
@@ -48,6 +50,7 @@ void Data::setFriendlyName(const QString& name)
 void Data::setValueSpec(const ValueSpec& spec)
 {
     if (spec.isVoid())
-        throw std::logic_error("void type is not allowed");
+        throw std::logic_error(
+          "Value specification for a data object cannot be of type 'void'");
     valueSpec = spec;
 }
