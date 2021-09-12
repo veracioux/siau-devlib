@@ -34,9 +34,11 @@ public:
     QList<Data*>& getData();
     QList<Function*>& getFunctions();
 
+    static QStringList textualAttributeNames();
+
     // SETTERS
-    QString& operator[](const QString& attr);      // TODO test
-    QString operator[](const QString& attr) const; // TODO test
+    QString& operator[](const QString& attr);
+    QString operator[](const QString& attr) const;
     void setName(const QString& name);
     void setVendorId(const QString& id);
     void setModel(const QString& id);

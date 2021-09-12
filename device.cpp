@@ -50,6 +50,11 @@ QString& Device::operator[](const QString& attr)
     return values[attr];
 }
 
+QStringList Device::textualAttributeNames()
+{
+    return Device().values.keys();
+}
+
 QString Device::operator[](const QString& attr) const // TODO test
 {
     return const_cast<Device*>(this)->operator[](attr);
