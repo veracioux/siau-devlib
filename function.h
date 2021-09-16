@@ -84,7 +84,7 @@ public:
 
     // GETTERS
     QList<SingleFunction*>& getSubfunctions();
-    QList<SingleFunction*> getSubfunctions() const;
+    QList<const SingleFunction*> getSubfunctions() const;
 
     bool isSingleFunction() const override;
 

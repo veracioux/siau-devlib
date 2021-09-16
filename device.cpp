@@ -35,9 +35,19 @@ QList<Data*>& Device::getData()
     return data;
 }
 
+QList<const Data *> Device::getData() const
+{
+    return QList<const Data*>(data.begin(), data.end());
+}
+
 QList<Function*>& Device::getFunctions()
 {
     return functions;
+}
+
+QList<const Function*> Device::getFunctions() const
+{
+    return QList<const Function*>(functions.begin(), functions.end());
 }
 
 QString& Device::operator[](const QString& attr)

@@ -32,7 +32,9 @@ public:
     QString getModel() const;
     QString getSerialNo() const;
     QList<Data*>& getData();
+    QList<const Data*> getData() const;
     QList<Function*>& getFunctions();
+    QList<const Function*> getFunctions() const;
 
     static QStringList textualAttributeNames();
 

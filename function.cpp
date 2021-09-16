@@ -82,6 +82,16 @@ void SingleFunction::setCondition(const Condition& condition)
  * MultiFunction *
  *****************/
 
+QList<Devlib::SingleFunction *> &Devlib::MultiFunction::getSubfunctions()
+{
+    return subfunctions;
+}
+
+QList<const Devlib::SingleFunction *> Devlib::MultiFunction::getSubfunctions() const
+{
+    return QList<const Devlib::SingleFunction *>(subfunctions.begin(), subfunctions.end());
+}
+
 bool MultiFunction::isSingleFunction() const
 {
     return false;
