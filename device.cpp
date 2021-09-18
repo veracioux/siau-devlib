@@ -1,4 +1,5 @@
 #include "device.h"
+#include "util.h"
 
 using namespace Devlib;
 
@@ -50,46 +51,52 @@ QList<const Function*> Device::getFunctions() const
     return QList<const Function*>(functions.begin(), functions.end());
 }
 
-QString& Device::operator[](const QString& attr)
+// helpers
+void assertNameValid(const QString& name)
 {
-    if (!values.contains(attr))
-        throw std::logic_error(
-          QStringLiteral("Device does not have '%1' a string attribute")
-            .arg(attr)
-            .toStdString());
-    return values[attr];
+    if (!validIdentifiers().exactMatch(name))
+        throw std::logic_error("Device name must be a valid C++ identifier");
+}
+
+void Device::setAttribute(const QString& attr, const QString& value)
+{
+    assertAttributeExists(attr);
+    if (attr == "name")
+        assertNameValid(attr);
+    attributes[attr] = value;
 }
 
 QStringList Device::textualAttributeNames()
 {
-    return Device().values.keys();
+    return Device().attributes.keys();
 }
 
-QString Device::operator[](const QString& attr) const // TODO test
+QString Device::operator[](const QString& attr) const
 {
-    return const_cast<Device*>(this)->operator[](attr);
+    assertAttributeExists(attr);
+    return attributes[attr];
 }
 
 // SETTERS
 
-void Device::setName(const QString& name)
+void Device::setName(const QString& value)
 {
-    (*this)["name"] = name;
+    setAttribute("name", value);
 }
 
-void Device::setVendorId(const QString& id)
+void Device::setVendorId(const QString& value)
 {
-    (*this)["vendorId"] = id;
+    setAttribute("vendorId", value);
 }
 
-void Device::setModel(const QString& id)
+void Device::setModel(const QString& value)
 {
-    (*this)["model"] = id;
+    setAttribute("model", value);
 }
 
-void Device::setSerialNo(const QString& serialNo)
+void Device::setSerialNo(const QString& value)
 {
-    (*this)["serialNo"] = serialNo;
+    setAttribute("serialNo", value);
 }
 
 void Device::setData(const QList<Data*>& data)
@@ -100,4 +107,13 @@ void Device::setData(const QList<Data*>& data)
 void Device::setFunctions(const QList<Function*>& functions)
 {
     this->functions = functions;
+}
+
+void Device::assertAttributeExists(const QString& attr) const
+{
+    if (!attributes.contains(attr))
+        throw std::logic_error(
+          QStringLiteral("Device does not have '%1' as a string attribute")
+            .arg(attr)
+            .toStdString());
 }

@@ -15,7 +15,7 @@ namespace Devlib
 
 class DEVLIB_EXPORT Device
 {
-    QMap<QString, QString> values = { { "name", "" },
+    QMap<QString, QString> attributes = { { "name", "" },
                                       { "vendorId", "" },
                                       { "model", "" },
                                       { "serialNo", "" },
@@ -25,6 +25,7 @@ class DEVLIB_EXPORT Device
     QList<Function*> functions;
 
 public:
+
     virtual ~Device();
     // GETTERS
     QString getName() const;
@@ -35,18 +36,21 @@ public:
     QList<const Data*> getData() const;
     QList<Function*>& getFunctions();
     QList<const Function*> getFunctions() const;
+    QString operator[](const QString& attr) const;
 
     static QStringList textualAttributeNames();
 
     // SETTERS
-    QString& operator[](const QString& attr);
-    QString operator[](const QString& attr) const;
+    void setAttribute(const QString& attr, const QString& value);
     void setName(const QString& name);
     void setVendorId(const QString& id);
     void setModel(const QString& id);
     void setSerialNo(const QString& serialNo);
     void setData(const QList<Data*>& data);
     void setFunctions(const QList<Function*>& functions);
+
+private:
+    void assertAttributeExists(const QString &attr) const;
 };
 
 }

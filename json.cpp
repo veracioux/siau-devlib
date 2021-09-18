@@ -157,7 +157,7 @@ Device jsonParseDevice(const QString& factoryFile)
         QJsonValue val = jsonObject[attr];
         if (val.isString())
             try {
-                device[attr] = val.toString();
+                device.setAttribute(attr, val.toString());
             } catch (std::exception& e) {
                 goto unknown_attribute;
             }
