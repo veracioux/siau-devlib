@@ -107,7 +107,9 @@ Condition jsonParseCondition(const QString& cond)
 QJsonObject jsonObjectFromFile(const QString& path)
 {
     QFile file(path);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        throw std::runtime_error(QStringLiteral("Could not open file '%1'")
+                                 .arg(path).toStdString());
 
     QJsonDocument document = QJsonDocument::fromJson(file.readAll());
     file.close();
@@ -142,6 +144,13 @@ QList<Function*> _parseFunctionsArray(const QJsonArray& jsonArray)
     return result;
 }
 
+// helper
+void throwInvalidAttribute(const QString &attr)
+{
+    throw std::runtime_error(QStringLiteral("Attribute '%1' is invalid")
+                             .arg(attr).toStdString());
+}
+
 Device jsonParseDevice(const QString& factoryFile)
 {
     if (!QFileInfo(factoryFile).isFile())
@@ -159,20 +168,18 @@ Device jsonParseDevice(const QString& factoryFile)
             try {
                 device.setAttribute(attr, val.toString());
             } catch (std::exception& e) {
-                goto unknown_attribute;
+                throwInvalidAttribute(attr);
             }
         else if (val.isArray() && attr == "data")
             device.setData(_parseDataArray(val.toArray()));
         else if (val.isArray() && attr == "functions")
             device.setFunctions(_parseFunctionsArray(val.toArray()));
         else
-            goto unknown_attribute;
+            throwInvalidAttribute(attr);
     }
 
     return device;
 
-unknown_attribute:
-    throw std::runtime_error("Unknown device attribute: "); // TODO
 }
 
 }

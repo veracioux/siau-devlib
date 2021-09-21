@@ -26,9 +26,9 @@ QString Device::getModel() const
     return (*this)["model"];
 }
 
-QString Device::getSerialNo() const
+QString Device::getDescription() const
 {
-    return (*this)["serialNo"];
+    return (*this)["desc"];
 }
 
 QList<Data*>& Device::getData()
@@ -60,7 +60,7 @@ void assertNameValid(const QString& name)
 
 void Device::setAttribute(const QString& attr, const QString& value)
 {
-    assertAttributeExists(attr);
+    assertTextAttributeExists(attr);
     if (attr == "name")
         assertNameValid(attr);
     attributes[attr] = value;
@@ -73,8 +73,13 @@ QStringList Device::textualAttributeNames()
 
 QString Device::operator[](const QString& attr) const
 {
-    assertAttributeExists(attr);
+    assertTextAttributeExists(attr);
     return attributes[attr];
+}
+
+QMap<QString, QString> Devlib::Device::getAttributes() const
+{
+    return attributes;
 }
 
 // SETTERS
@@ -94,9 +99,9 @@ void Device::setModel(const QString& value)
     setAttribute("model", value);
 }
 
-void Device::setSerialNo(const QString& value)
+void Device::setDescription(const QString& value)
 {
-    setAttribute("serialNo", value);
+    setAttribute("desc", value);
 }
 
 void Device::setData(const QList<Data*>& data)
@@ -109,11 +114,11 @@ void Device::setFunctions(const QList<Function*>& functions)
     this->functions = functions;
 }
 
-void Device::assertAttributeExists(const QString& attr) const
+void Device::assertTextAttributeExists(const QString& attr) const
 {
     if (!attributes.contains(attr))
         throw std::logic_error(
-          QStringLiteral("Device does not have '%1' as a string attribute")
+          QStringLiteral("Device does not have '%1' as a text attribute")
             .arg(attr)
             .toStdString());
 }

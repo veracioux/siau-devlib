@@ -18,7 +18,6 @@ class DEVLIB_EXPORT Device
     QMap<QString, QString> attributes = { { "name", "" },
                                       { "vendorId", "" },
                                       { "model", "" },
-                                      { "serialNo", "" },
                                       { "deviceType", "" },
                                       { "desc", ""}};
     QList<Data*> data;
@@ -31,12 +30,13 @@ public:
     QString getName() const;
     QString getVendorId() const;
     QString getModel() const;
-    QString getSerialNo() const;
+    QString getDescription() const;
     QList<Data*>& getData();
     QList<const Data*> getData() const;
     QList<Function*>& getFunctions();
     QList<const Function*> getFunctions() const;
     QString operator[](const QString& attr) const;
+    QMap<QString, QString> getAttributes() const;
 
     static QStringList textualAttributeNames();
 
@@ -45,12 +45,12 @@ public:
     void setName(const QString& name);
     void setVendorId(const QString& id);
     void setModel(const QString& id);
-    void setSerialNo(const QString& serialNo);
+    void setDescription(const QString& serialNo);
     void setData(const QList<Data*>& data);
     void setFunctions(const QList<Function*>& functions);
 
 private:
-    void assertAttributeExists(const QString &attr) const;
+    void assertTextAttributeExists(const QString &attr) const;
 };
 
 }
