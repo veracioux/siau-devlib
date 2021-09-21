@@ -15,7 +15,6 @@
 namespace Devlib
 {
 
-// THE MOST IMPORTANT OBJECTS
 /**
  * Parse the contents of *factory_device.json* and *user_device.json* and
  * return a `Device` object.
@@ -26,7 +25,6 @@ namespace Devlib
  * @throws std::logic_error If the file cannot be parsed into a device.
  */
 Device DEVLIB_EXPORT jsonParseDevice(const QString& factoryFile);
-// TODO LATER Add parsing for user_device.json
 /**
  * Parse a device data object and return a `Data` object.
  *

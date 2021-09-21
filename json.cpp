@@ -57,7 +57,7 @@ Data* jsonParseData(const QJsonObject& data)
 
     if (!name.isString())
         throw std::runtime_error("Attribute 'name' must be a string");
-    if (!friendlyName.isString())
+    if (!friendlyName.isUndefined() && !friendlyName.isString())
         throw std::runtime_error("Attribute 'friendly' must be a string");
     ValueSpec valueSpec = jsonParseValueSpec(data);
 
@@ -74,7 +74,7 @@ SingleFunction* jsonParseFunction(const QJsonObject& func)
 
     if (!name.isString())
         throw std::runtime_error("Attribute 'name' must be a string");
-    if (!friendlyName.isString())
+    if (!friendlyName.isUndefined() && !friendlyName.isString())
         throw std::runtime_error("Attribute 'friendly' must be a string");
 
     ValueSpec valueSpec = jsonParseValueSpec(func);
@@ -88,6 +88,18 @@ SingleFunction* jsonParseFunction(const QJsonObject& func)
     // TODO result->setCondition(condition);
 
     return result;
+}
+
+MultiFunction* jsonParseFunction(const QJsonArray& func)
+{
+    QList<SingleFunction*> sfun;
+    sfun.reserve(func.size());
+    for (const auto &val : func) {
+        if (!val.isObject())
+            throw std::runtime_error("Subfunctions of a multi function must be JSON objects");
+        sfun.append(jsonParseFunction(val.toObject()));
+    }
+    return new MultiFunction(sfun);
 }
 
 Condition jsonParseCondition(const QString& cond)
@@ -136,10 +148,13 @@ QList<Function*> _parseFunctionsArray(const QJsonArray& jsonArray)
     result.reserve(jsonArray.size());
 
     foreach (const QJsonValue& val, jsonArray) {
-        if (!val.isObject())
+        if (val.isObject())     // single function
+            result.append(jsonParseFunction(val.toObject()));
+        else if (val.isArray()) // multi function
+            result.append(jsonParseFunction(val.toArray()));
+        else
             throw std::runtime_error(
-              "Members of 'function' array must be JSON objects");
-        result.append(jsonParseFunction(val.toObject()));
+              "Members of 'function' array must be JSON objects or function arrays");
     }
     return result;
 }

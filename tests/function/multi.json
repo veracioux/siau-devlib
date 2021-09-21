@@ -1,0 +1,6 @@
+{
+    "function": [
+        { "name": "turnOn", "valueType": "void" },
+        { "name": "turnOff", "valueType": "void" }
+    ]
+}

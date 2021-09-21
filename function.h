@@ -10,6 +10,8 @@
 namespace Devlib
 {
 
+class SingleFunction;
+
 /**
  * A condition to enable a device function.
  *
@@ -32,6 +34,9 @@ class DEVLIB_EXPORT Function
 public:
     virtual bool isSingleFunction() const = 0;
     virtual bool isMultiFunction() const;
+
+    virtual QList<SingleFunction*> getSingleFunctions() = 0;
+    virtual QList<const SingleFunction*> getSingleFunctions() const = 0;
 };
 
 /**
@@ -63,6 +68,8 @@ public:
     Condition getCondition() const;
 
     bool isSingleFunction() const override;
+    QList<SingleFunction*> getSingleFunctions() override;
+    QList<const SingleFunction*> getSingleFunctions() const override;
 
     // SETTERS
     void setName(const QString& name);
@@ -79,14 +86,14 @@ class DEVLIB_EXPORT MultiFunction : public Function
     QList<SingleFunction*> subfunctions;
 
 public:
-    MultiFunction(const QList<SingleFunction>& subfunctions);
+    MultiFunction() = default;
+    MultiFunction(const QList<SingleFunction*>& subfunctions);
     virtual ~MultiFunction() = default;
 
     // GETTERS
-    QList<SingleFunction*>& getSubfunctions();
-    QList<const SingleFunction*> getSubfunctions() const;
-
     bool isSingleFunction() const override;
+    QList<SingleFunction*> getSingleFunctions() override;
+    QList<const SingleFunction*> getSingleFunctions() const override;
 
     // SETTERS
     void setSubfunctions(const QList<SingleFunction*>& subfunctions);

@@ -56,6 +56,16 @@ bool SingleFunction::isSingleFunction() const
     return true;
 }
 
+QList<SingleFunction *> SingleFunction::getSingleFunctions()
+{
+    return QList<SingleFunction*>{this};
+}
+
+QList<const SingleFunction *> SingleFunction::getSingleFunctions() const
+{
+    return QList<const SingleFunction*>{this};
+}
+
 // SETTERS
 
 void SingleFunction::setName(const QString& name)
@@ -82,19 +92,23 @@ void SingleFunction::setCondition(const Condition& condition)
  * MultiFunction *
  *****************/
 
-QList<Devlib::SingleFunction *> &Devlib::MultiFunction::getSubfunctions()
-{
-    return subfunctions;
-}
-
-QList<const Devlib::SingleFunction *> Devlib::MultiFunction::getSubfunctions() const
-{
-    return QList<const Devlib::SingleFunction *>(subfunctions.begin(), subfunctions.end());
-}
+Devlib::MultiFunction::MultiFunction(const QList<SingleFunction *> &subfunctions)
+    : subfunctions(subfunctions)
+{}
 
 bool MultiFunction::isSingleFunction() const
 {
     return false;
+}
+
+QList<SingleFunction*> MultiFunction::getSingleFunctions()
+{
+    return subfunctions;
+}
+
+QList<const SingleFunction*> MultiFunction::getSingleFunctions() const
+{
+    return QList<const SingleFunction*>(subfunctions.begin(), subfunctions.end());
 }
 
 void MultiFunction::setSubfunctions(const QList<SingleFunction*>& subfunctions)

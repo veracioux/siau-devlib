@@ -97,7 +97,7 @@ private slots:
 
     void testValueSpecIntegrated()
     {
-        auto spec = specFromFile("function/function.json");
+        auto spec = specFromFile("function/single.json");
         QVERIFY(spec.isFloat());
         QCOMPARE(spec.getMinFloat(), 0);
         QCOMPARE(spec.getMaxFloat(), 100);
@@ -117,9 +117,9 @@ private slots:
         delete data;
     }
 
-    void testFunction()
+    void testSingleFunction()
     {
-        auto obj = jsonObjectFromFile("function/function.json");
+        auto obj = jsonObjectFromFile("function/single.json");
         SingleFunction* function = jsonParseFunction(obj);
         QCOMPARE(function->getName(), "setBrightness");
         QCOMPARE(function->getFriendlyName(), "Set Brightness");
@@ -128,6 +128,23 @@ private slots:
         QCOMPARE(spec.getValueRange(), (QStringList{ "0", "100" }));
         QCOMPARE(spec.getUnit(), "%");
         delete function;
+    }
+
+    void testMultiFunction()
+    {
+        auto obj = jsonObjectFromFile("function/multi.json");
+        QJsonArray multiFunction = obj["function"].toArray();
+        MultiFunction *mfun = jsonParseFunction(multiFunction);
+        auto sfunList = mfun->getSingleFunctions();
+        QCOMPARE(sfunList.size(), 2);
+
+        SingleFunction *sfun1 = sfunList[0], *sfun2 = sfunList[1];
+
+        QCOMPARE(sfun1->getName(), "turnOn");
+        QVERIFY(sfun1->getValueSpec().isVoid());
+
+        QCOMPARE(sfun2->getName(), "turnOff");
+        QVERIFY(sfun2->getValueSpec().isVoid());
     }
 
     void testDevice()
@@ -139,7 +156,7 @@ private slots:
         QCOMPARE(device["deviceType"], "Generic"); // TODO
 
         QList<Function*> functions = device.getFunctions();
-        QVERIFY(functions.length() == 1);
+        QVERIFY(functions.length() == 2);
         QVERIFY(functions[0]->isSingleFunction());
 
         SingleFunction* sfun = dynamic_cast<SingleFunction*>(functions[0]);
@@ -151,6 +168,15 @@ private slots:
         QVERIFY(valueSpec.isFloat());
         QCOMPARE(valueSpec.getValueRange(), (QStringList{ "0", "100" }));
         QCOMPARE(valueSpec.getUnit(), "%");
+
+        MultiFunction* mfun = dynamic_cast<MultiFunction*>(functions[1]);
+        SingleFunction *sfun1 = mfun->getSingleFunctions()[0],
+                *sfun2 = mfun->getSingleFunctions()[1];
+        QVERIFY(mfun != nullptr);
+        QCOMPARE(sfun1->getName(), "turnOn");
+        QVERIFY(sfun1->getValueSpec().isVoid());
+        QCOMPARE(sfun2->getName(), "turnOff");
+        QVERIFY(sfun2->getValueSpec().isVoid());
 
         QList<Data*> data = device.getData();
         QVERIFY(data.length() == 1);
