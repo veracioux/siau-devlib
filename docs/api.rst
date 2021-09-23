@@ -34,13 +34,13 @@ Klasa ``ValueSpec``
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: ValueSpec
+      .. doxygenclass:: Devlib::ValueSpec
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: ValueSpec
+      .. doxygenclass:: Devlib::ValueSpec
          :project: devlib
 
 Klasa ``Data``
@@ -59,13 +59,13 @@ Klasa ``Data``
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: Data
+      .. doxygenclass:: Devlib::Data
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: Data
+      .. doxygenclass:: Devlib::Data
          :project: devlib
 
 
@@ -86,13 +86,13 @@ Struktura ``Condition``
 
    .. tab:: Sažetak
 
-      .. doxygenstruct:: Condition
+      .. doxygenstruct:: Devlib::Condition
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenstruct:: Condition
+      .. doxygenstruct:: Devlib::Condition
          :project: devlib
 
 Klasa ``Function`` i podklase
@@ -112,13 +112,13 @@ Klasa ``Function`` i podklase
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: Function
+      .. doxygenclass:: Devlib::Function
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: Function
+      .. doxygenclass:: Devlib::Function
          :project: devlib
 |startovw|
 
@@ -131,13 +131,13 @@ Klasa ``Function`` i podklase
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: SingleFunction
+      .. doxygenclass:: Devlib::SingleFunction
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: SingleFunction
+      .. doxygenclass:: Devlib::SingleFunction
          :project: devlib
 
 |startovw|
@@ -151,13 +151,13 @@ Klasa ``Function`` i podklase
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: MultiFunction
+      .. doxygenclass:: Devlib::MultiFunction
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: MultiFunction
+      .. doxygenclass:: Devlib::MultiFunction
          :project: devlib
 
 Klasa ``Device``
@@ -176,13 +176,13 @@ Klasa ``Device``
 
    .. tab:: Sažetak
 
-      .. doxygenclass:: Device
+      .. doxygenclass:: Devlib::Device
          :project: devlib
          :outline:
 
    .. tab:: Detalji
 
-      .. doxygenclass:: Device
+      .. doxygenclass:: Devlib::Device
          :project: devlib
 
 Funkcije za rad sa JSON
